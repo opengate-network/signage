@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OpenGate Signage</title>
+
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 1;
+            transition: opacity 0.5s linear;
+        }
+
+        .hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="image-frame1" src="{{ url_for('static', filename='images/opengate_hd.png') }}" />
+    <img id="image-frame2" class="hidden" src="{{ url_for('static', filename='images/opengate_hd.png') }}" />
+
+    <script>
+        let imageList = [];
+
+        let imageFrame = [
+            document.getElementById("image-frame1"),
+            document.getElementById("image-frame2")
+        ];
+
+        let showedImageFrame = 0;
+        let showedImage = 0;
+
+        function nextImageFrame() {
+            return (showedImageFrame + 1) % 2;
+        }
+
+        function toggleImage() {
+            imageFrame[showedImageFrame].className = "hidden"
+            imageFrame[nextImageFrame()].className = ""
+            showedImageFrame = nextImageFrame()
+        }
+
+        function changeImage(newImageURL) {
+            nextAction = function () {
+                toggleImage();
+                imageFrame[nextImageFrame()].src = newImageURL
+            }
+
+            if (imageFrame[nextImageFrame()].complete) {
+                nextAction();
+            } else {
+                imageFrame[nextImageFrame()].onload = nextAction;
+            }
+
+        }
+
+        async function fetchImageList() {
+            let req = await fetch('/image_list');
+            imageList = await req.json();
+        }
+
+
+
+        setInterval(fetchImageList, 10000);
+
+        setInterval(() => {
+            if (imageList.length == 0) {
+                changeImage("{{ url_for('static', filename='images/opengate_hd.png') }}");
+                return
+            }
+            showedImage = (showedImage + 1) % imageList.length;
+            changeImage(imageList[showedImage]);
+        }, 15000);
+
+        fetchImageList();
+    </script>
+</body>
+
+</html>

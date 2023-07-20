@@ -1,0 +1,159 @@
+@font-face {
+    font-family: Barlow;
+    font-style: normal;
+    font-weight: normal;
+    src: url("../fonts/Barlow-Regular.woff") format("woff")
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+html,
+body {
+    height: 100%;
+    font-size: 35px
+}
+
+body {
+    color: #fff;
+    background-color: gray;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-image: url(https://bing.biturl.top/?resolution=1920&format=image&index=0&mkt=fr-FR);*/
+    /*background-image: url(https://source.unsplash.com/1980x1080/?space);*/
+    background-image: url(/image);
+    background-size: cover;
+    font-family: Barlow, sans-serif;
+}
+
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    height: 100%;
+    padding: 3.3rem;
+}
+
+/*
+ * TOP SECTION
+ */
+
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: -65px;
+}
+
+.top>div {
+    display: inline-block;
+    align-self: center;
+}
+
+.datetime>div {
+    display: inline-block;
+}
+
+.time>span {
+    font-size: 4rem;
+}
+
+.date {
+    vertical-align: super;
+}
+
+.logo {
+    width: 19rem;
+}
+
+
+/*
+ * WEATHER SECTION
+ */
+.weather {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/*
+ * WEATHER SECTION - CURRENT WEATHER
+ */
+
+.current>.data>.temp {
+    font-size: 8.3rem;
+    line-height: 7rem;
+    vertical-align: top;
+}
+
+.current>.data>.extra-info {
+    display: inline-block;
+}
+
+.current>.data>.extra-info img {
+    width: 0.8rem;
+    height: 0.8rem;
+}
+
+.current>.data>.extra-info>.unit {
+    font-size: 2.75rem;
+}
+
+
+.current>.condition {
+    display: flex;
+    align-items: center;
+}
+
+.current>.condition>img {
+    width: 2rem;
+}
+
+.current>.condition>span {
+    margin-left: 8px;
+    text-transform: capitalize;
+}
+
+/*
+ * WEATHER SECTION - FORECAST
+ */
+
+.forecast {
+    display: flex;
+    align-self: flex-end;
+    margin-bottom: 25px;
+}
+
+.weather-element {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather-element+.weather-element {
+    margin-left: 3rem;
+}
+
+.weather-element>img {
+    width: 2.5rem;
+}
+
+.weather-element>.temp {
+    font-weight: 700;
+}
+
+.weather-element .weather-time {
+    margin-top: 0.5rem;
+    white-space: nowrap;
+}

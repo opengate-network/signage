@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>OpenGate</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}" />
+    <meta http-equiv="refresh" content="10" />
+
+</head>
+
+<body>
+    <div class="content">
+        <div class="top">
+            <div class="datetime">
+                <div class="time">
+                    <span>{{ now.strftime('%H:%M') }}</span>
+                </div>
+                <div class="date">
+                    <span>{{ now.strftime('%A') }}</span>
+                    <span>{{ now.strftime('%d') }}</span><br />
+                    <span>{{ now.strftime('%B') }}</span>
+                </div>
+            </div>
+            <div><img src="{{ url_for('static', filename='images/opengate_high_res_w.png') }}" alt="opengate" class="logo" /></div>
+
+        </div>
+        
+        <div class="weather">
+            <div class="current">
+                <div class="condition">
+                    <img src="{{ url_for('static', filename='images/weather_icons/' ~ actual_weather.image ~ '.svg') }}">
+                    <span>{{ actual_weather.weather }}</span>
+                </div>
+                <div class="data">
+                    <span class="temp">{{ actual_weather.temp }}</span>
+                    <div class="extra-info">
+                        <span class="unit">°C</span><br />
+                        <span><img src="{{ url_for('static', filename='images/icons/umbrella.svg') }}"> <span>{{ actual_weather.rain }}</span>%</span><br />
+                        <span><img src="{{ url_for('static', filename='images/icons/droplet.svg') }}"> <span>{{ actual_weather.humidity }}</span>%</span><br />
+                        <span><img src="{{ url_for('static', filename='images/icons/wind.svg') }}"> <span>{{ actual_weather.wind }}</span> km/h</span>
+                    </div>
+                </div>
+            </div>
+            <div class="forecast">
+{% for forecast in forecast_weather %}
+                <div class="weather-element" id="weather-element-1">
+                    <span class="temp">{{ forecast.temp }}°C</span>
+                    <img src="{{ url_for('static', filename='images/weather_icons/' ~ forecast.image ~ '.svg') }}">
+                    <span class="weather-time">{{ forecast.date.strftime('%H:%M') }}</span>
+                </div>
+{% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
